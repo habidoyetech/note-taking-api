@@ -5,7 +5,6 @@ import User from '../models/user';
 import { registerSchema } from '../utils/validation';
 
 export const register = async (req: Request, res: Response) => {
-  
   const { error } = registerSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.details[0].message });
 
@@ -26,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
     const savedUser = await user.save();
     res.status(201).json({ userId: savedUser._id, email: savedUser.email });
   } catch (err) {
-    res.status(500).json({ error: 'Server Error' });
+    res.status(500).json({ error: 'Server Error', message: "" });
   }
 };
 
@@ -39,5 +38,5 @@ export const login = async (req: Request, res: Response) => {
 
   // Create Token
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
-  res.header('auth-token', token).json({ token });
+  res.header('auth-token', token).json({ token: token, message: "Login successful", status: 200 });
 };
