@@ -14,4 +14,6 @@ const NoteSchema: Schema = new Schema({
   content: { type: String, required: true },
 }, { timestamps: true });
 
-export default mongoose.model<INote>('Note', NoteSchema);
+const Note = mongoose.model<INote>('Note', NoteSchema);
+
+export default Note;
