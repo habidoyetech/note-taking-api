@@ -70,7 +70,36 @@ export const getNotes = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Update Note
+export const getNoteById = async (req: AuthRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res
+        .status(400)
+        .json({ status: "fail", message: "Invalid Note ID format" });
+    }
+
+    const note = await Note.findOne({ _id: id, userId: req.user._id });
+
+    if (!note) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Note not found.",
+      });
+    }
+
+    res.json({
+      status: "success",
+      data: note,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: "error",
+      message: "Error retrieving the note.",
+    });
+  }
+};
+
 export const updateNote = async (req: AuthRequest, res: Response) => {
   try {
     const { id } = req.params;
@@ -107,32 +136,33 @@ export const updateNote = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Delete Note
 export const deleteNote = async (req: AuthRequest, res: Response) => {
   try {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ status: 'fail', message: 'Invalid Note ID format' });
+      return res
+        .status(400)
+        .json({ status: "fail", message: "Invalid Note ID format" });
     }
 
     const note = await Note.findOneAndDelete({ _id: id, userId: req.user._id });
 
     if (!note) {
       return res.status(404).json({
-        status: 'fail',
-        message: 'Note not found or already deleted.'
+        status: "fail",
+        message: "Note not found or already deleted.",
       });
     }
 
     res.json({
-      status: 'success',
-      message: 'Note deleted successfully'
+      status: "success",
+      message: "Note deleted successfully",
     });
   } catch (err: any) {
     res.status(500).json({
-      status: 'error',
-      message: 'Error deleting the note.'
+      status: "error",
+      message: "Error deleting the note.",
     });
   }
 };

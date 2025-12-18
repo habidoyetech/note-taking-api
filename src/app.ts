@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import authRoutes from './routes/authRoute'
 import cors from 'cors';
+import noteRoutes from './routes/noteRoute'
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });  
 
@@ -18,3 +19,4 @@ mongoose.connect(process.env.DB_CONNECT as string)
     .catch((err) => console.log(err, "error"));
 
 app.use('/api/user', authRoutes);
+app.use('/api/notes', noteRoutes);

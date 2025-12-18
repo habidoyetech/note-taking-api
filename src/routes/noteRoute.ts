@@ -3,7 +3,8 @@ import {
     createNote, 
     getNotes, 
     updateNote, 
-    deleteNote 
+    deleteNote,
+    getNoteById
 } from '../controllers/noteController';
 import { auth } from '../middleware/auth';
 
@@ -13,5 +14,6 @@ router.post('/', auth, createNote);
 router.get('/', auth, getNotes);
 router.put('/:id', auth, updateNote);
 router.delete('/:id', auth, deleteNote);
+router.get('/:id', auth, getNoteById);
 
 export default router;
