@@ -69,6 +69,7 @@ Content-Type: application/json
 {
   "email": "user@example.com",
   "password": "securepassword",
+  "name": "Abidoye Abiodun"
 }
 ```
 
@@ -120,9 +121,9 @@ GET /api/notes
 Authorization: Bearer <token>
 ```
 
-#### Get all notes with date filtering
+#### Get all notes by title and date created
 ```http
-GET /api/notes?startDate=2024-01-01&endDate=2024-12-31
+GET /api/notes?title=one&createdAt=2024-12-31
 Authorization: Bearer <token>
 ```
 
@@ -160,18 +161,15 @@ Authorization: Bearer <token>
 │   │   └── noteController.ts
 │   ├── middleware/
 │   │   ├── auth.ts
-│   │   └── errorHandler.ts
 │   ├── models/
-│   │   ├── User.ts
-│   │   └── Note.ts
+│   │   ├── user.ts
+│   │   └── note.ts
 │   ├── routes/
-│   │   ├── authRoutes.ts
-│   │   └── noteRoutes.ts
+│   │   ├── authRoute.ts
+│   │   └── noteRoute.ts
 │   ├── utils/
 │   │   └── validation.ts
-│   ├── config/
-│   │   └── database.ts
-│   └── server.ts
+│   └── app.ts
 ├── .env
 ├── .gitignore
 ├── package.json
@@ -198,10 +196,10 @@ Authorization: Bearer <token>
    - **Start Command**: `npm start`
 
 4. Add environment variables in Render dashboard:
-   - `MONGODB_URI` - Your MongoDB connection string (use MongoDB Atlas)
+   - `DB_CONNECT` - Your MongoDB connection string (use MongoDB Atlas)
    - `JWT_SECRET` - Your JWT secret key
-   - `JWT_EXPIRES_IN` - Token expiration (e.g., "7d")
-   - `NODE_ENV` - Set to "production"
+   - `PORT` - PORT
+
 
 5. Deploy! Render will automatically deploy your application.
 
