@@ -1,6 +1,6 @@
 # Note-Taking REST API
 
-A secure, scalable REST API for a note-taking application built with **TypeScript**, **Node.js**, **Express**, and **MongoDB**. This project satisfies the requirements for the Swipe Team technical assessment.
+A secure, scalable REST API for a note-taking application built with **TypeScript**, **Node.js**, **Express**, and **MongoDB**. 
 
 
 
